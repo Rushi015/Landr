@@ -10,6 +10,7 @@ import Recursive from "@/components/editorComponents/Recursive";
 const EditorPage = (props: Props) => {
   const editor = useEditorStore((state) => state.editor);
   console.log(editor.previewMode);
+  console.log(editor.selected.styles)
   const Preview = useEditorStore((state) => state.togglePreviewMode);
   function handleUnPreview() {
     Preview();

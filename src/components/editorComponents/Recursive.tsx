@@ -8,7 +8,7 @@ type Props = {
 
 const Recursive = ({ element }: Props) => {
   switch (element.type) {
-    case "text":
+    case "text":  
       return <TextComponent element={element} />;
 
     case "container":

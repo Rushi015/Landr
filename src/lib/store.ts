@@ -22,6 +22,9 @@ export type EditorBtns =
     backgroundRepeat: "no-repeat",
     textAlign: "left",
     opacity: "100%",
+    height:"100px",
+    width:"1000px"
+
 };
 export type EditorElement = {
   id: string;

@@ -15,6 +15,7 @@ import clsx from "clsx";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { useEditorStore } from "@/lib/store";
 import TabList from "@/components/sidebar/tabs/TabList";
+import SettingTabs from "@/components/sidebar/tabs/SettingTabs";
 type Props = {};
 
 const EditorSidebar = (props: Props) => {
@@ -56,7 +57,7 @@ const EditorSidebar = (props: Props) => {
                   like.
                 </SheetDescription>
               </SheetHeader>
-              Settings
+         <SettingTabs/>
             </TabsContent>
 
            <TabsContent value="Components">
