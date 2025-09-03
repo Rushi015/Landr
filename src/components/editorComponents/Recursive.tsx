@@ -15,6 +15,8 @@ const Recursive = ({ element }: Props) => {
       return <Container element={element} />;
     case "__body":
       return <Container element={element} />;
+      // case "navbar":
+      // return <NavBar element={element} />;
     default:
       return null;
   }
