@@ -13,6 +13,7 @@ export type EditorBtns =
   | "__body"
   | "image"
   | null
+  |"navbar"
   | "3Col";
 
   

@@ -59,7 +59,26 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
-
+         
+        case "navbar":
+        addElement({
+          containerId: id,
+          elementDetails: {
+            id: v4(),
+            name: "Navbar",
+            content: [],
+            styles: {
+              ...defaultStyles,
+              position: "absolute",
+              top: y,
+              left: x,
+              width: 200,
+              height: 150,
+            },
+            type: "navbar",
+          },
+        });
+        break;
       default:
         console.warn("Unknown component type:", componentType);
     }
@@ -180,3 +199,18 @@ const Container = ({ element }: Props) => {
 };
 
 export default Container;
+
+
+// styles 
+// container 
+//typography,decoration  - each font and styles till tomorrwo -6th sep
+
+//payment ,dashboard form and backend databases 7 and image 
+//hosting made websites 8
+// hosting 
+//3 layout includes navigation bar - awards website 
+//background image maker just where we can choose a colour in this we should be make a 
+//either add pattern or make a canvas for this only 
+//chatgpt whats is the mostt important 
+//zapier 
+

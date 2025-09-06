@@ -2,6 +2,7 @@ import { EditorBtns } from "@/lib/store";
 import React from "react";
 import Textplaceholder from "../sidebar-components-placeholder/text-placeholder";
 import ContainerPlaceholder from "../sidebar-components-placeholder/container-placeholder";
+import NavBarPlaceHolder from "../sidebar-components-placeholder/navbar-placeholder";
 type Props = {};
 
 const ComponentTab = (props: Props) => {
@@ -17,12 +18,18 @@ const ComponentTab = (props: Props) => {
       id: "text",
       group: "elements",
     },
-     {
-            Component: <ContainerPlaceholder />,
-            label: "Container",
-            id: "container",
-            group: "elements",
-        },
+    {
+      Component: <ContainerPlaceholder />,
+      label: "Container",
+      id: "container",
+      group: "elements",
+    },
+    {
+      Component: <NavBarPlaceHolder />,
+      label: "navbar",
+      id: "navbar",
+      group: "elements",
+    },
   ];
 
   return (

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { EyeOff } from "lucide-react";
 type Props = {};
 import Recursive from "@/components/editorComponents/Recursive";
+import NavBar from "@/components/editorComponents/navbar";
 const EditorPage = (props: Props) => {
   const editor = useEditorStore((state) => state.editor);
   console.log(editor.previewMode);
@@ -28,6 +29,9 @@ const EditorPage = (props: Props) => {
         }
       )}
     >
+
+
+     
       {editor.previewMode && (
         <Button
           variant={"ghost"}
