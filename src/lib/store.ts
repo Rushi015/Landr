@@ -13,6 +13,7 @@ export type EditorBtns =
   | "__body"
   | "image"
   | null
+  |"navbar"
   | "3Col";
 
   
@@ -313,7 +314,6 @@ height and width must change by it
 
 
 */
-
 
 
 

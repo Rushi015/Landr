@@ -22,6 +22,7 @@ const Container = ({ element }: Props) => {
   const handleOnclickBody = (e: React.MouseEvent) => {
     e.stopPropagation();
     changeClickedElement(element);
+    console.log(element.content)
   };
 
   const handleDragStart = (e: React.DragEvent, type: string) => {
@@ -36,7 +37,7 @@ const Container = ({ element }: Props) => {
 
     
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    const x = e.clientX - rect.left;
+     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
     switch (componentType) {
@@ -47,9 +48,10 @@ const Container = ({ element }: Props) => {
             id: v4(),
             name: "Container",
             content: [],
+
             styles: {
               ...defaultStyles,
-              position: "absolute",
+              position: "relative",
               top: y,
               left: x,
               width: 200,
@@ -59,7 +61,26 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
-
+         
+        case "text":
+        addElement({
+          containerId: id,
+          elementDetails: {
+            id: v4(),
+            name: "Text",
+            content: [],
+            styles: {
+              ...defaultStyles,
+              position: "absolute",
+              top: y,
+              left: x,
+              width: 200,
+              height: 150,
+            },
+            type: "text",
+          },
+        });
+        break;
       default:
         console.warn("Unknown component type:", componentType);
     }
@@ -180,3 +201,17 @@ const Container = ({ element }: Props) => {
 };
 
 export default Container;
+
+
+// styles 
+// container 
+//typography,decoration  - each font and styles till tomorrwo -6th sep
+
+//payment ,dashboard form and backend databases 7 and image 
+//hosting made websites 8
+// hosting 
+//3 layout includes navigation bar - awards website 
+//background image maker just where we can choose a colour in this we should be make a 
+//either add pattern or make a canvas for this only 
+//chatgpt whats is the mostt important 
+//zapier 

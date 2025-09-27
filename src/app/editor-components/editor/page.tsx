@@ -1,34 +1,29 @@
 "use client";
-
 import clsx from "clsx";
-import { useEditorStore } from "@/lib/store";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { EyeOff } from "lucide-react";
-type Props = {};
 import Recursive from "@/components/editorComponents/Recursive";
-const EditorPage = (props: Props) => {
+import { Button } from "@/components/ui/button";
+import { useEditorStore } from "@/lib/store";
+import { EyeOff } from "lucide-react";
+const EditorPage = () => {
   const editor = useEditorStore((state) => state.editor);
-  console.log(editor.previewMode);
-  console.log(editor.selected.styles)
-  const Preview = useEditorStore((state) => state.togglePreviewMode);
-  function handleUnPreview() {
+  const Preview = useEditorStore((state)=>state.togglePreviewMode)
+   function handleUnPreview() {
     Preview();
   }
-
   return (
     <div
+    //  className="border-black border-2 h-screen mr-[385px]"
       className={clsx(
         "use-automation-zoom-in h-[calc(100vh_-_97px)] overflow-hidden mr-[385px] transition-all rounded-md ",
         {
           "!p-0 !mr-0 !mb-0": editor.previewMode === true,
-          // "!w-[850px]": state.editor.device === "Tablet",
-          // "!w-[420px]": state.editor.device === "Mobile",
-          // "w-full": state.editor.device === "Desktop",
+          
         }
       )}
     >
-      {editor.previewMode && (
+
+
+       {editor.previewMode && (
         <Button
           variant={"ghost"}
           size={"icon"}
@@ -39,11 +34,26 @@ const EditorPage = (props: Props) => {
         </Button>
       )}
       {Array.isArray(editor.elements) &&
-        editor.elements.map((childElement) => (
-          <Recursive key={childElement.id} element={childElement} />
+        editor.elements.map((childELement) => (
+          <Recursive key={childELement.id} element={childELement} />
         ))}
     </div>
   );
 };
 
 export default EditorPage;
+
+/*
+i will give 1 hr - page 
+            1.5 hr - recursive and container
+            1.5hr - store
+
+            after all this i will try 
+
+            text component
+
+so recursive element is something that takes an element
+checks it types then renders it 
+
+
+*/
