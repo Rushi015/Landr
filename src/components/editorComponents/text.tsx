@@ -53,41 +53,7 @@ const TextComponent = ({ element }: Props) => {
   //   }
   // }, [content]);
 
-const TextComponent = ({ element }: Props) => {
-  const spanRef = useRef<HTMLSpanElement | null>(null);
 
-  // Zustand state
-  const editor = useEditorStore((state) => state.editor);
-  const { selected, liveMode, previewMode } = editor;
-
-  // Zustand actions
-  const changeClickedElement = useEditorStore(
-    (state) => state.changeClickedElement
-  );
-  const updateElement = useEditorStore((state) => state.updateElement);
-  const deleteElement = useEditorStore((state) => state.deleteElement);
-
-  const { id, styles, content } = element;
-
-  const handleOnClickBody = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    changeClickedElement(element);
-  };
-
-  // const handleBlurElement = () => {
-  //   if (spanRef.current) {
-  //     updateElement({
-  //       ...element,
-  //       content: {
-  //         innerText: spanRef.current.innerText,
-  //       },
-  //     });
-  //   }
-  // };
-
-  const handleDeleteElement = () => {
-    deleteElement(element.id);
-  };
 
   // Sync content with span
   // useEffect(() => {
@@ -162,7 +128,7 @@ const TextComponent = ({ element }: Props) => {
 };
   
 
-};
+
 
 export default TextComponent;
 
