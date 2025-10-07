@@ -37,7 +37,7 @@ const Container = ({ element }: Props) => {
 
     
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-     const x = e.clientX - rect.left;
+    const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
     switch (componentType) {
@@ -52,10 +52,10 @@ const Container = ({ element }: Props) => {
             styles: {
               ...defaultStyles,
               position: "relative",
-              top: y,
-              left: x,
-              width: 200,
-              height: 150,
+              top: y,      
+              left: x,     
+              width: 200,  
+              height: 150, 
             },
             type: "container",
           },
@@ -78,6 +78,25 @@ const Container = ({ element }: Props) => {
               height: 150,
             },
             type: "text",
+          },
+        });
+
+         case "navbar":
+        addElement({
+          containerId: id,
+          elementDetails: {
+            id: v4(),
+            name: "Navbar",
+            content: [],
+            styles: {
+              ...defaultStyles,
+              position: "absolute",
+              top: y,
+              left: x,
+              width: 200,
+              height: 150,
+            },
+            type: "navbar",
           },
         });
         break;

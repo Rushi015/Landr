@@ -3,13 +3,41 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EditorElement, useEditorStore } from "@/lib/store";
+//import { Monosans, Monosans_Italic } from "@/lib/font"; 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 type Props = {
   element: EditorElement;
 };
 
+
+
+
 const SettingTabs = ({ element }: Props) => {
+
+
+
+
+
+
 const editor = useEditorStore(state=>state.editor)
 const updateElement = useEditorStore(state=>state.updateElement)
+
+
+
+// const fonts = [
+//   { label: "Mona Sans", value: Monosans.style.fontFamily },
+//   { label: "Mona Sans Italic", value: Monosans_Italic.style.fontFamily },
+//   { label: "Arial", value: "Arial, sans-serif" },
+//   { label: "Inter", value: "Inter, sans-serif" },
+// ];
+
 const handleOnChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
   const styleKey = e.target.id as keyof React.CSSProperties;
   let value: string | number = e.target.value;
@@ -28,7 +56,7 @@ const handleOnChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
   return (
-    <Accordion type="multiple" className="w-full " defaultValue={[ "Dimensions"]}>
+    <Accordion type="multiple" className="w-full " defaultValue={[ "Dimensions","Typography"]}>
     <AccordionItem value="Dimensions" className="px-0 py-0 border-y">
       <AccordionTrigger className="px-6 !no-underline">
         Dimensions
@@ -150,6 +178,41 @@ const handleOnChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
         </div>
       </AccordionContent>
     </AccordionItem>
+
+      <AccordionItem value="Typography" className="px-0 py-0 border-y">
+           <AccordionTrigger className="px-6 !no-underline ">Typography</AccordionTrigger>
+         <AccordionContent className="px-6">
+             <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+<Select
+  onValueChange={(val) => {
+    updateElement({
+      ...editor.selected,
+      styles: {
+        ...editor.selected.styles,
+        fontFamily: val,
+      },
+    });
+  }}
+>
+  <SelectTrigger className="w-full">
+    <SelectValue placeholder="Choose font" />
+  </SelectTrigger>
+  {/* <SelectContent>
+    {fonts.map((font) => (
+      <SelectItem key={font.value} value={font.value}>
+        {font.label}
+      </SelectItem>
+    ))}
+  </SelectContent> */}
+</Select>
+
+                    </div>
+             </div>
+         
+         </AccordionContent>
+
+      </AccordionItem>
     </Accordion>
   );
 };
