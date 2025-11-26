@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -14,11 +8,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Plan {
+  BASE
+  UNLIMITED
+}
 
 model User {
-  id        Int      @id @default(autoincrement())
-  
-  email     String   @unique
-  password String 
-  createdAt DateTime @default(now())
+  id          Int        @id @default(autoincrement())
+  email       String     @unique
+  name        String
+  password    String
+  userName    String
+  isVerified  Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  workspaceId String?
+  workspace   WorkSpace? @relation(fields: [workspaceId], references: [id])
+}
+
+model WorkSpace {
+  id            String         @id @default(uuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  name          String
+  companyEmail  String
+  companyPhone  String
+
+  users         User[]
+  projects      Project[]
+  subscription  Subscription?
+}
+
+model Project {
+  id          String     @id @default(uuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  name        String
+  companyEmail String
+  companyPhone String
+
+  workspaceId String
+  workspace   WorkSpace @relation(fields: [workspaceId], references: [id])
+
+  @@index([workspaceId])
+}
+
+model Subscription {
+  id                  String     @id @default(uuid())
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  plan                Plan?
+  price               String?
+  active              Boolean    @default(false)
+  priceId             String
+  customerId          String
+  currentPeriodEndDate DateTime
+  subscriptionId      String     @unique
+  workspaceId         String?    @unique
+  workspace           WorkSpace? @relation(fields: [workspaceId], references: [id])
+
+  @@index([customerId])
 }

@@ -1,40 +1,43 @@
+"use client";
+
 import { EditorElement, useEditorStore } from "@/lib/store";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Rnd } from "react-rnd";
 import clsx from "clsx";
+import { Doto } from "next/font/google";
 
-import { Doto } from "next/font/google"; 
-const DotoWgt ="500"
 const dotoFont = Doto({
- subsets:["latin"],
- weight:["900"]
+  subsets: ["latin"],
+  weight: ["900"],
 });
 
 type Props = { element: EditorElement };
 
 const TextComponent = ({ element }: Props) => {
-  const { id, styles, content } = element;
+  const { id, styles } = element;
+
   const spanRef = useRef<HTMLSpanElement | null>(null);
   const editor = useEditorStore((state) => state.editor);
-  const changeClickedElement = useEditorStore((state)=>state.changeClickedElement)
-const handleOnClickBody =(e:React.MouseEvent)=>{
-      e.stopPropagation()
-      changeClickedElement(element)
-}
+  const changeClickedElement = useEditorStore((state) => state.changeClickedElement);
+
+  const handleOnClickBody = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    changeClickedElement(element);
+  };
+
   return (
     <Rnd
-    size={{
-      width:
-      typeof styles.width === "string"
+      size={{
+        width:
+          typeof styles.width === "string"
             ? parseInt(styles.width)
-            : styles.width||200,
-      height:
-       typeof styles.height === "string"
+            : styles.width || 200,
+        height:
+          typeof styles.height === "string"
             ? parseInt(styles.height)
-            : styles.height ||  50,
-    }}
-    
-     position={{
+            : styles.height || 50,
+      }}
+      position={{
         x:
           typeof styles.left === "string"
             ? parseInt(styles.left)
@@ -44,25 +47,33 @@ const handleOnClickBody =(e:React.MouseEvent)=>{
             ? parseInt(styles.top)
             : styles.top || 0,
       }}
-        style={{ fontFamily: "Monosans-Italic" }}
-     className={clsx(
-        "p-[2px] w-full m-[5px] relative text-[16px] transition-all",
+      bounds="parent"
+      enableResizing={true}
+      onDragStop={(e, d) => {
+        element.styles.left = d.x;
+        element.styles.top = d.y;
+      }}
+      onResizeStop={(e, direction, ref, delta, position) => {
+        element.styles.width = parseInt(ref.style.width);
+        element.styles.height = parseInt(ref.style.height);
+        element.styles.left = position.x;
+        element.styles.top = position.y;
+      }}
+      className={clsx(
+        "group relative cursor-move",
         {
           "!border-blue-500": editor.selected?.id === id,
           "!border-solid": editor.selected?.id === id,
           "!border-dashed border border-slate-300": !editor.previewMode,
         }
       )}
-    onClick={handleOnClickBody}
-    > 
-    
+      onClick={handleOnClickBody}
+    >
       <span
-        className={`${dotoFont.className} text-3xl w-60 h-60`}
-        
-        
-      
         ref={spanRef}
-        contentEditable={true}
+        contentEditable={!editor.previewMode}
+        suppressContentEditableWarning
+        className={`${dotoFont.className} block w-full h-full text-3xl outline-none`}
       >
         enter your text here
       </span>
@@ -71,3 +82,4 @@ const handleOnClickBody =(e:React.MouseEvent)=>{
 };
 
 export default TextComponent;
+[]
